@@ -334,7 +334,11 @@ enum {
     _SC_XOPEN_STREAMS,
     _SC_XOPEN_UNIX,
     _SC_XOPEN_UUCP,
-    _SC_XOPEN_VERSION
+    _SC_XOPEN_VERSION,
+    _SC_PHYS_PAGES,
+    _SC_AVPHYS_PAGES,
+    _SC_NPROCESSORS_CONF,
+    _SC_NPROCESSORS_ONLN
 };
 
 #define STDIN_FILENO                        0
