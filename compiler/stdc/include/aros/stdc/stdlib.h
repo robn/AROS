@@ -118,10 +118,12 @@ lldiv_t lldiv(long long int numer, long long int denom);
 int mblen(const char *s, size_t n);
 /* INLINE int mbtowc(wchar_t * restrict pwc, const char * restrict s, size_t n); */
 /* INLINE int wctomb(char *s, wchar_t wchar); */
+#define mbrtowc(pwc, s, n, ps) mbtowc(pwc, s, n)
 
 /* Multibyte/wide string conversion functions */
 /* INLINE size_t mbstowcs(wchar_t * restrict pwcs, const char * restrict s, size_t n); */
 /* INLINE size_t wcstombs(char * restrict s, const wchar_t * restrict pwcs, size_t n); */
+#define wcrtomb(s, wc, ps) wctomb(s, wc)
 
 /* AROS extra */
 int __stdc_mb_cur_max(void);
