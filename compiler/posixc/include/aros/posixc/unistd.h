@@ -435,7 +435,28 @@ __off64_t lseek64(int filedes, __off64_t offset, int whence);
 long pathconf(const char *path, int name);
 /* NOTIMPL int pause(void); */
 int pipe(int filedes[2]);
-/* NOTIMPL ssize_t pread(int d, void *buf, size_t nbytes, off_t offset); */
+#if !defined(NO_POSIX_WRAPPERS)
+ssize_t __posixc_pread(int d, void *buf, size_t nbytes, off_t offset);
+#if defined(__off64_t_defined)
+ssize_t pread64(int d, void *buf, size_t nbytes, __off64_t offset);
+#endif
+#if defined(__USE_FILE_OFFSET64)
+static __inline ssize_t pread(int d, void *buf, size_t nbytes, off_t offset)
+{
+    return pread64(d, buf, nbytes, (__off64_t) offset);
+}
+#else
+static __inline ssize_t pread(int d, void *buf, size_t nbytes, off_t offset)
+{
+    return __posixc_pread(d, buf, nbytes, offset);
+}
+#endif
+#else  /* __USE_FILE_OFFSET64 */
+ssize_t pread(int d, void *buf, size_t nbytes, off_t offset);
+#if defined(__off64_t_defined)
+ssize_t pread64(int d, void *buf, size_t nbytes, __off64_t offset);
+#endif
+#endif /* NO_POSIX_WRAPPERS */
 /* NOTIMPL ssize_t pwrite(int d, const void *buf, size_t nbytes, off_t offset); */
 ssize_t read(int d, void *buf, size_t nbytes);
 ssize_t readlink(const char * restrict path, char * restrict buf, size_t bufsize);

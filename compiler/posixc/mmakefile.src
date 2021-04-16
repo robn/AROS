@@ -142,6 +142,8 @@ POSIXC := \
     pipe \
     popen \
     posix_memalign \
+    pread \
+    pread64 \
     printf \
     putchar \
     putenv \
