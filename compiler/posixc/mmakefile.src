@@ -95,12 +95,14 @@ POSIXC := \
     getegid \
     geteuid \
     getenv \
+    getdelim \
     getfsstat \
     getgid \
     getgrent \
     getgrgid \
     getgrnam \
     getgroups \
+    getline \
     getloadavg \
     getlogin \
     getpass \

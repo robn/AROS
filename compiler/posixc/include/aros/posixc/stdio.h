@@ -143,8 +143,8 @@ int ferror(FILE *stream);
 void funlockfile(FILE *);
 int getc_unlocked(FILE *);
 /* NOTIMPL int getchar_unlocked(void); */
-/* NOTIMPL ssize_t getdelim(char **restrict, size_t *restrict, int, FILE *restrict); */
-/* NOTIMPL ssize_t getline(char **restrict, size_t *restrict, FILE *restrict); */
+ssize_t getdelim(char ** restrict lineptr, size_t * restrict n, int delim, FILE * restrict stream);
+ssize_t getline(char ** restrict lineptr, size_t * restrict n, FILE *restrict stream);
 /* NOTIMPL FILE *open_memstream(char **, size_t *); */
 int pclose(FILE *);
 FILE *popen(const char *, const char *);
