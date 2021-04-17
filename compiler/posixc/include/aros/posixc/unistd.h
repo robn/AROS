@@ -433,7 +433,7 @@ __off64_t lseek64(int filedes, __off64_t offset, int whence);
 #endif /* NO_POSIX_WRAPPERS */
 /* NOTIMPL int nice(int incr); */
 long pathconf(const char *path, int name);
-/* NOTIMPL int pause(void); */
+int pause(void);
 int pipe(int filedes[2]);
 #if !defined(NO_POSIX_WRAPPERS)
 ssize_t __posixc_pread(int d, void *buf, size_t nbytes, off_t offset);

@@ -137,6 +137,7 @@ POSIXC := \
     openat \
     opendir \
     pathconf \
+    pause \
     pclose \
     perror \
     pipe \
