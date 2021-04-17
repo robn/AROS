@@ -38,7 +38,7 @@ int posix_memalign(void **memptr, size_t alignment, size_t size);
 int putenv(const char *);
 /* NOTIMPL int rand_r(unsigned int *); */
 long random(void);
-/* NOTIMPL char *realpath(const char * restrict , char * restrict); */
+char *realpath(const char * restrict , char * restrict);
 unsigned short int *seed48(unsigned short int [3]);
 int setenv(const char *, const char *, int);
 /* NOTIMPL void setkey(const char *); */
