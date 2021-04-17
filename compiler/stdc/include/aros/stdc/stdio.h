@@ -118,6 +118,10 @@ int vsprintf(char * restrict s, const char * restrict format,
 	va_list arg);
 int vsscanf(const char * restrict s, const char * restrict format,
 	va_list arg);
+#ifdef _GNU_SOURCE
+int asprintf(char ** restrict strp, const char * restrict format, ...);
+int vasprintf(char ** restrict strp, const char * restrict format, va_list arg);
+#endif
 
 /* Character input/output functions */
 #if (!defined(_XOPEN_SOURCE) && \
