@@ -271,6 +271,7 @@ int pthread_setcancelstate(int state, int *oldstate);
 int pthread_setcanceltype(int type, int *oldtype);
 void pthread_testcancel(void);
 int pthread_once(pthread_once_t *once_control, void (*init_routine)(void));
+int pthread_atfork(void (*prepare)(void), void (*parent)(void), void (*child)(void));
 
 //
 // Scheduling functions
