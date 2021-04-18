@@ -9,6 +9,7 @@ HIDD subsystem:
     Sven Drieling
     Pavel Fedin
     Nick Andrews (Kalamatee)
+    Rob Norris
 
 Intuition:
     Stefan Berger
@@ -62,6 +63,7 @@ Graphics:
     Krzysztof Smiechowicz
     Nick Andrews (Kalamatee)
     Toni Wilen
+    Rob Norris
 
 Shell commands:
     Martin Recktenwald
@@ -77,6 +79,7 @@ Shell commands:
     Olivier Tigreat
     Vidar Hokstad
     Nick Andrews (Kalamatee)
+    Rob Norris
 
 Workbench:
     Adam Chodorowski
@@ -97,6 +100,7 @@ Tools:
     Matthias Rustler
     Jason McMullan
     Nick Andrews (Kalamatee)
+    Rob Norris
 
 Preferences:
     Georg Steger
@@ -117,6 +121,7 @@ Zune:
     Fabio Alemagna
     Adam Chodorowski
     Nick Andrews (Kalamatee)
+    Rob Norris
 
 Kernel:
     Iain Templeton
@@ -129,6 +134,7 @@ Kernel:
     Pavel Fedin
     Markus Weiss
     Jason McMullan
+    Rob Norris
 
 DOS:
     Georg Steger
@@ -137,6 +143,7 @@ DOS:
     Rob Howard
     Pavel Fedin
     Toni Wilen
+    Rob Norris
 
 Networking:
     Neil Cafferkey
@@ -145,6 +152,7 @@ Networking:
     Nick Andrews (Kalamatee)
     Alain Greppin
     Franck Charlet
+    Rob Norris
 
 C link library and POSIX layer:
     Aaron Digulla
@@ -153,6 +161,7 @@ C link library and POSIX layer:
     Henning Kiel
     Nick Andrews (Kalamatee)
     Staf Verhaegen
+    Rob Norris
 
 Datatypes:
     Johan Alfredsson
