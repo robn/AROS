@@ -95,7 +95,7 @@
 
 
 /* Special value for *at() */
-/* NOTIMPL #define AT_FDCWD */
+#define AT_FDCWD -100
 
 /* flag for faccessat() */
 /* NOTIMPL #define AT_EACCESS */
@@ -167,7 +167,7 @@ int creat64(const char * filename, int mode);
 #endif /* NO_POSIX_WRAPPERS */
 int fcntl (int fd, int cmd, ...);
 int open  (const char * filename, int flags, ...);
-/* NOTIMPL int openat(int, const char *, int, ...); */
+int openat(int dirfd, const char *filename, int flags, ...);
 /* NOTIMPL int posix_fadvise(int fd, off_t offset, size_t len, int advice); */
 /* NOTIMPL int posix_fallocate(int fd, off_t offset, size_t len); */
 

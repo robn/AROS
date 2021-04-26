@@ -8,6 +8,7 @@
 
 #include "__fdesc.h"
 #include "__stdio.h"
+#include <fcntl.h>
 
 /*****************************************************************************
 
@@ -63,7 +64,7 @@
     }
 
     oflags = __smode2oflags(mode);
-    fd = __open(stream->fd, path, oflags, 644);
+    fd = __openat(AT_FDCWD, stream->fd, path, oflags, 644);
 
     if (fd == -1)
         return NULL;

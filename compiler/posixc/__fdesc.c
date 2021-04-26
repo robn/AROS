@@ -4,6 +4,7 @@
     File descriptor handling internals.
 */
 
+#define DEBUG 1
 #include <aros/debug.h>
 
 #include LC_LIBDEFS_FILE
@@ -166,7 +167,7 @@ LONG __oflags2amode(int flags)
     return openmode;
 }
 
-int __open(int wanted_fd, const char *pathname, int flags, int mode)
+int __openat(int dirfd, int wanted_fd, const char *pathname, int flags, int mode)
 {
     struct PosixCIntBase *PosixCBase =
         (struct PosixCIntBase *)__aros_getbase_PosixCBase();
@@ -175,7 +176,16 @@ int __open(int wanted_fd, const char *pathname, int flags, int mode)
     fdesc *currdesc = NULL;
     fcb *cblock = NULL;
     struct FileInfoBlock *fib = NULL;
-    LONG  openmode = __oflags2amode(flags);
+    fdesc *desc = NULL;
+    char newpath[PATH_MAX];
+
+    LONG openmode = __oflags2amode(flags);
+    if (openmode == -1)
+    {
+        errno = EINVAL;
+        D(bug( "__open: bad mode, exiting with error EINVAL\n"));
+        return -1;
+    }
 
     if (PosixCBase->doupath && pathname[0] == '\0')
     {
@@ -187,13 +197,28 @@ int __open(int wanted_fd, const char *pathname, int flags, int mode)
     pathname = __path_u2a(pathname);
     if (!pathname) return -1;
     
-    D(bug("__open: entering, wanted fd = %d, path = %s, flags = %d, mode = %d\n", wanted_fd, pathname, flags, mode));
+    D(bug("__open: entering, dirfd = %d, wanted fd = %d, path = %s, flags = %d, mode = %d\n", dirfd, wanted_fd, pathname, flags, mode));
 
-    if (openmode == -1)
-    {
-        errno = EINVAL;
-        D(bug( "__open: bad mode, exiting with error EINVAL\n"));
-        return -1;
+    /* get the lock for the base dir, either the passed dirfd or the current dir */
+    BPTR dirlock;
+    if (dirfd == AT_FDCWD) {
+        dirlock = CurrentDir(BNULL);
+        CurrentDir(dirlock);
+    }
+    else {
+        fdesc *desc = __getfdesc(dirfd);
+        if (!desc)
+        {
+            errno = EBADF;
+            return -1;
+        }
+        if (!(desc->fcb->privflags & _FCB_ISDIR))
+        {
+            errno = ENOTDIR;
+            return -1;
+        }
+
+        dirlock = desc->fcb->handle;
     }
 
     cblock = AllocVec(sizeof(fcb), MEMF_ANY | MEMF_CLEAR);
@@ -210,9 +235,9 @@ int __open(int wanted_fd, const char *pathname, int flags, int mode)
      * In case of file system, test existance of file. Non-file system handlers (i.e CON:)
      * support opening a file while not supporting locking.
      */
-    if(IsFileSystem(pathname) == DOSTRUE)
+    if(IsFileSystemRelative(dirlock, pathname) == DOSTRUE)
     {
-        lock = Lock((char *)pathname, SHARED_LOCK);
+        lock = LockRelative(dirlock, (char *)pathname, SHARED_LOCK);
         if (!lock)
         {
             if (IoErr() == ERROR_OBJECT_WRONG_TYPE)
@@ -299,7 +324,7 @@ int __open(int wanted_fd, const char *pathname, int flags, int mode)
         /* Handle O_CREAT (creates the file only if it does not exist) */
         if (flags & O_CREAT)
         {
-            BPTR tmp = Open((char *)pathname, MODE_NEWFILE);
+            BPTR tmp = OpenRelative(dirlock, (char *)pathname, MODE_NEWFILE);
             if (tmp != BNULL) Close(tmp);
             /* File is closed as O_CREAT does not define access
              * mode. This is handled by R/W modes.
@@ -307,7 +332,7 @@ int __open(int wanted_fd, const char *pathname, int flags, int mode)
         }
     }
 
-    if (!(fh = Open((char *)pathname, openmode)))
+    if (!(fh = OpenRelative(dirlock, (char *)pathname, openmode)))
     {
         ULONG ioerr = IoErr();
         D(bug("__open: Open ioerr=%d\n", ioerr));
