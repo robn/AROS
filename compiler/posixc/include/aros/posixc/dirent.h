@@ -73,7 +73,7 @@ typedef struct __dirdesc DIR;
 __BEGIN_DECLS
 
 #if defined(__USE_XOPEN2K8)
-/* NOTIMPL DIR *fdopendir(int); */
+DIR *fdopendir(int);
 #endif
 
 DIR *opendir (const char *filename);

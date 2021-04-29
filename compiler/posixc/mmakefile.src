@@ -57,6 +57,7 @@ POSIXC := \
     fclose \
     fcntl \
     fdopen \
+    fdopendir \
     feof \
     ferror \
     fflush \
