@@ -151,6 +151,8 @@ POSIXC := \
     putchar \
     putenv \
     puts \
+    pwrite \
+    pwrite64 \
     random \
     read \
     readdir \

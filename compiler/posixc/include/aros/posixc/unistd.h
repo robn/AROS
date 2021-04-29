@@ -457,7 +457,28 @@ ssize_t pread(int d, void *buf, size_t nbytes, off_t offset);
 ssize_t pread64(int d, void *buf, size_t nbytes, __off64_t offset);
 #endif
 #endif /* NO_POSIX_WRAPPERS */
-/* NOTIMPL ssize_t pwrite(int d, const void *buf, size_t nbytes, off_t offset); */
+#if !defined(NO_POSIX_WRAPPERS)
+ssize_t __posixc_pwrite(int d, const void *buf, size_t nbytes, off_t offset);
+#if defined(__off64_t_defined)
+ssize_t pwrite64(int d, const void *buf, size_t nbytes, __off64_t offset);
+#endif
+#if defined(__USE_FILE_OFFSET64)
+static __inline ssize_t pwrite(int d, const void *buf, size_t nbytes, off_t offset)
+{
+    return pwrite64(d, buf, nbytes, (__off64_t) offset);
+}
+#else
+static __inline ssize_t pwrite(int d, const void *buf, size_t nbytes, off_t offset)
+{
+    return __posixc_pwrite(d, buf, nbytes, offset);
+}
+#endif
+#else  /* __USE_FILE_OFFSET64 */
+ssize_t pwrite(int d, const void *buf, size_t nbytes, off_t offset);
+#if defined(__off64_t_defined)
+ssize_t pwrite64(int d, const void *buf, size_t nbytes, __off64_t offset);
+#endif
+#endif /* NO_POSIX_WRAPPERS */
 ssize_t read(int d, void *buf, size_t nbytes);
 ssize_t readlink(const char * restrict path, char * restrict buf, size_t bufsize);
 /* NOTIMPL ssize_t readlinkat(int, const char *restrict, char *restrict, size_t); */
