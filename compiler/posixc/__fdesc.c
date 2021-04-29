@@ -370,6 +370,8 @@ int __openat(int dirfd, int wanted_fd, const char *pathname, int flags, int mode
         }
     }
 
+    if (flags & O_CLOEXEC)
+        currdesc->fdflags |= FD_CLOEXEC;
 
 success:
     currdesc->fcb->handle    = fh;

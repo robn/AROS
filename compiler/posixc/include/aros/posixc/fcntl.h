@@ -108,7 +108,7 @@
 
 
 /* flags for open() */
-/* NOTIMPL #define O_CLOEXEC */
+#define O_CLOEXEC 0x10000
 /* NOTIMPL #define O_DIRECTORY */
 /* NOTIMPL #define O_NOFOLLOW */
 
