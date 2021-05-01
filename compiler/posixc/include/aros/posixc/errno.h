@@ -2,13 +2,9 @@
 #define _POSIXC_ERRNO_H_
 
 /*
-    Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2021, The AROS Development Team. All rights reserved.
 
     POSIX.1-2008 header file errno.h
-
-    On AROS we take the NetBSD errno numbering as reference for backwards
-    compatibility with the errno numbering used in the bsdsocket.library.
 */
 
 /*
@@ -52,88 +48,145 @@
 /* C99 */
 #include <aros/stdc/errno.h>
 
-/* Other codes defined by POSIX.1-2008 */
+#define	EPERM		1		/* Operation not permitted */
+/* C99: ENOENT */
+#define	ESRCH		3		/* No such process */
+/* C99: EINTR */
+#define	EIO		5		/* Input/output error */
+#define	ENXIO		6		/* Device not configured */
 #define	E2BIG		7		/* Argument list too long */
+/* C99: ENOEXEC */
+#define	EBADF		9		/* Bad file descriptor */
+#define	ECHILD		10		/* No child processes */
+#define	EDEADLK		11		/* Resource deadlock avoided */
+/* C99: ENOMEM */
+/* C99: EACCES */
+#define	EFAULT		14		/* Bad address */
+/* C99: ENOTBLK */
+/* C99: EBUSY */
+/* C99: EEXIST */
+/* C99: EXDEV */
+#define	ENODEV		19		/* Operation not supported by device */
+/* C99: ENOTDIR */
+#define	EISDIR		21		/* Is a directory */
+/* C99: EINVAL */
+#define	ENFILE		23		/* Too many open files in system */
+#define	EMFILE		24		/* Too many open files */
+#define	ENOTTY		25		/* Inappropriate ioctl for device */
+#define	ETXTBSY		26		/* Text file busy */
+#define	EFBIG		27		/* File too large */
+#define	ENOSPC		28		/* No space left on device */
+#define	ESPIPE		29		/* Illegal seek */
+#define	EROFS		30		/* Read-only file system */
+#define	EMLINK		31		/* Too many links */
+#define	EPIPE		32		/* Broken pipe */
+
+/* math software */
+/* C99: EDOM */
+/* C99: ERANGE */
+
+/* non-blocking and interrupt i/o */
+#define	EAGAIN		35		/* Resource temporarily unavailable */
+#define	EWOULDBLOCK	EAGAIN		/* Operation would block */
+#define	EINPROGRESS	36		/* Operation now in progress */
+#define	EALREADY	37		/* Operation already in progress */
+
+/* ipc/network software -- argument errors */
+#define	ENOTSOCK	38		/* Socket operation on non-socket */
+#define	EDESTADDRREQ	39		/* Destination address required */
+#define	EMSGSIZE	40		/* Message too long */
+#define	EPROTOTYPE	41		/* Protocol wrong type for socket */
+#define	ENOPROTOOPT	42		/* Protocol not available */
+#define	EPROTONOSUPPORT	43		/* Protocol not supported */
+#define	ESOCKTNOSUPPORT	44		/* Socket type not supported */
+#define	EOPNOTSUPP	45		/* Operation not supported on socket */
+#define	EPFNOSUPPORT	46		/* Protocol family not supported */
+#define	EAFNOSUPPORT	47		/* Address family not supported by protocol family */
 #define	EADDRINUSE	48		/* Address already in use */
 #define	EADDRNOTAVAIL	49		/* Can't assign requested address */
-#define	EAFNOSUPPORT	47		/* Address family not supported by protocol family */
-#define	EAGAIN		35		/* Resource temporarily unavailable */
-#define	EALREADY	37		/* Operation already in progress */
-#define	EBADF		9		/* Bad file descriptor */
-#define EBADMSG		88		/* Bad or Corrupt message */
-#define	ECANCELED	87		/* Operation canceled */
-#define	ECHILD		10		/* No child processes */
+
+/* ipc/network software -- operational errors */
+#define	ENETDOWN	50		/* Network is down */
+#define	ENETUNREACH	51		/* Network is unreachable */
+#define	ENETRESET	52		/* Network dropped connection on reset */
 #define	ECONNABORTED	53		/* Software caused connection abort */
-#define	ECONNREFUSED	61		/* Connection refused */
 #define	ECONNRESET	54		/* Connection reset by peer */
-#define	EDEADLK		11		/* Resource deadlock avoided */
-#define	EDESTADDRREQ	39		/* Destination address required */
+/* C99: ENOBUFS */
+#define	EISCONN		56		/* Socket is already connected */
+#define	ENOTCONN	57		/* Socket is not connected */
+#define	ESHUTDOWN	58		/* Can't send after socket shutdown */
+#define	ETOOMANYREFS	59		/* Too many references: can't splice */
+#define	ETIMEDOUT	60		/* Connection timed out */
+#define	ECONNREFUSED	61		/* Connection refused */
+
+#define	ELOOP		62		/* Too many levels of symbolic links */
+#define	ENAMETOOLONG	63		/* File name too long */
+
+/* should be rearranged */
+#define	EHOSTDOWN	64		/* Host is down */
+#define	EHOSTUNREACH	65		/* No route to host */
+#define	ENOTEMPTY	66		/* Directory not empty */
+
+/* quotas & mush */
 #define	EPROCLIM	67		/* Too many processes */
 #define	EUSERS		68		/* Too many users */
 #define	EDQUOT		69		/* Disc quota exceeded */
-#define	EFAULT		14		/* Bad address */
-#define	EFBIG		27		/* File too large */
-#define	EHOSTUNREACH	65		/* No route to host */
-#define	EIDRM		82		/* Identifier removed */
-#define	EINPROGRESS	36		/* Operation now in progress */
-#define	EIO		5		/* Input/output error */
-#define	EISCONN		56		/* Socket is already connected */
-#define	EISDIR		21		/* Is a directory */
-#define	ELOOP		62		/* Too many levels of symbolic links */
-#define	EMFILE		24		/* Too many open files */
-#define	EMLINK		31		/* Too many links */
-#define	EMSGSIZE	40		/* Message too long */
-#define EMULTIHOP	94		/* Multihop attempted */
-#define	ENAMETOOLONG	63		/* File name too long */
-#define	ENETDOWN	50		/* Network is down */
-#define	ENETRESET	52		/* Network dropped connection on reset */
-#define	ENETUNREACH	51		/* Network is unreachable */
-#define	ENFILE		23		/* Too many open files in system */
-#define ENODATA		89		/* No message available */
-#define	ENODEV		19		/* Operation not supported by device */
+
+/* Network File System */
+#define	ESTALE		70		/* Stale NFS file handle */
+#define	EREMOTE		71		/* Too many levels of remote in path */
+#define	EBADRPC		72		/* RPC struct is bad */
+#define	ERPCMISMATCH	73		/* RPC version wrong */
+#define	EPROGUNAVAIL	74		/* RPC prog. not avail */
+#define	EPROGMISMATCH	75		/* Program version wrong */
+#define	EPROCUNAVAIL	76		/* Bad procedure for program */
+
 #define	ENOLCK		77		/* No locks available */
+#define	ENOSYS		78		/* Function not implemented */
+
 #define	EFTYPE		79		/* Inappropriate file type or format */
-#define ENOLINK		95		/* Link has been severed */
+#define	EAUTH		80		/* Authentication error */
+#define	ENEEDAUTH	81		/* Need authenticator */
+
+/* SystemV IPC */
+#define	EIDRM		82		/* Identifier removed */
 #define	ENOMSG		83		/* No message of desired type */
-#define	ENOPROTOOPT	42		/* Protocol not available */
-#define	ENOSPC		28		/* No space left on device */
+#define	EOVERFLOW	84		/* Value too large to be stored in data type */
+
+/* Wide/multibyte-character handling, ISO/IEC 9899/AMD1:1995 */
+/* C99: EILSEQ */
+
+/* From IEEE Std 1003.1-2001 */
+/* Base, Realtime, Threads or Thread Priority Scheduling option errors */
+#define ENOTSUP		86		/* Not supported */
+
+/* Realtime option errors */
+#define	ECANCELED	87		/* Operation canceled */
+
+/* Realtime, XSI STREAMS option errors */
+#define EBADMSG		88		/* Bad or Corrupt message */
+
+/* XSI STREAMS option errors  */
+#define ENODATA		89		/* No message available */
 #define ENOSR		90		/* No STREAM resources */
 #define ENOSTR		91		/* Not a STREAM */
-#define	ENOSYS		78		/* Function not implemented */
-#define	ENOTCONN	57		/* Socket is not connected */
-#define	ENOTEMPTY	66		/* Directory not empty */
-/* NOTIMPL ENORECOVERABLE */
-#define	ENOTSOCK	38		/* Socket operation on non-socket */
-#define ENOTSUP		86		/* Not supported */
-#define	ENOTTY		25		/* Inappropriate ioctl for device */
-#define	ENXIO		6		/* Device not configured */
-#define	EOPNOTSUPP	45		/* Operation not supported on socket */
-#define	EOVERFLOW	84		/* Value too large to be stored in data type */
-/* NOTIMPL EOWNERDEAD */
-#define	EPERM		1		/* Operation not permitted */
-#define	EPIPE		32		/* Broken pipe */
-#define EPROTO		96		/* Protocol error */
-#define	EPROTONOSUPPORT	43		/* Protocol not supported */
-#define	EPROTOTYPE	41		/* Protocol wrong type for socket */
-#define	EROFS		30		/* Read-only file system */
-#define	ESPIPE		29		/* Illegal seek */
-#define	ESRCH		3		/* No such process */
-#define	ESTALE		70		/* Stale NFS file handle */
 #define ETIME		92		/* STREAM ioctl timeout */
-#define	ETIMEDOUT	60		/* Connection timed out */
-#define	ETXTBSY		26		/* Text file busy */
-#define	EWOULDBLOCK	EAGAIN		/* Operation would block */
 
+/* File system extended attribute errors */
+#define	ENOATTR		93		/* Attribute not found */
 
-/* Some compatibility defines mainly for AROSTCP */
-#ifdef __BSD_VISIBLE
-#define	EHOSTDOWN	64		/* Host is down */
-#define	EPFNOSUPPORT	46		/* Protocol family not supported */
+/* Realtime, XSI STREAMS option errors */
+#define EMULTIHOP	94		/* Multihop attempted */
+#define ENOLINK		95		/* Link has been severed */
+#define EPROTO		96		/* Protocol error */
+
+/* Robust mutexes */
+#define	EOWNERDEAD	97		/* Previous owner died */
+#define	ENOTRECOVERABLE	98		/* State not recoverable */
+
+/* pseudo-errors returned inside kernel to modify return to process */
 #define	ERESTART	-1		/* restart syscall */
-#define	ESOCKTNOSUPPORT	44		/* Socket type not supported */
-#define	ESHUTDOWN	58		/* Can't send after socket shutdown */
-#endif
 
-#define __POSIXC_ELAST	EPROTO		/* Points to highest used errno in this include */
+#define __POSIXC_ELAST	ENOTRECOVERABLE	/* Points to highest used errno in this include */
 
 #endif /* _POSIXC_ERRNO_H_ */

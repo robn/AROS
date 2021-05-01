@@ -6,9 +6,6 @@
     $Id$
 
     C99 header file errno.h
-
-    On AROS we take the NetBSD errno numbering as reference for backwards
-    compatibility with the errno numbering used in the bsdsocket.library.
 */
 
 /*
@@ -50,23 +47,23 @@
 
 /* C99 required error codes */
 #define	EDOM		33		/* Numerical argument out of domain */
-#define	EILSEQ		85		/* Illegal byte sequence */
-#define	EINVAL		22		/* Invalid argument */
 #define	ERANGE		34		/* Result too large */
+#define	EILSEQ		85		/* Illegal byte sequence */
 
 
 /* Codes used for error conversion of DOS error codes */
-#define	EACCES		13		/* Permission denied */
-#define ENOTBLK         15              /* Not a Block device */
-#define	EBUSY		16		/* Device busy */
-#define	EEXIST		17		/* File exists */
-#define	EINTR		4		/* Interrupted system call */
-#define	ENOBUFS		55		/* No buffer space available */
 #define	ENOENT		2		/* No such file or directory */
+#define	EINTR		4		/* Interrupted system call */
 #define	ENOEXEC		8		/* Exec format error */
 #define	ENOMEM		12		/* Cannot allocate memory */
-#define	ENOTDIR		20		/* Not a directory */
+#define	EACCES		13		/* Permission denied */
+#define	ENOTBLK		15		/* Block device required */
+#define	EBUSY		16		/* Device busy */
+#define	EEXIST		17		/* File exists */
 #define	EXDEV		18		/* Cross-device link */
+#define	ENOTDIR		20		/* Not a directory */
+#define	EINVAL		22		/* Invalid argument */
+#define	ENOBUFS		55		/* No buffer space available */
 
 /* MAX_ERRNO is currently used by ioerr2errno conversion
    To keep backwards compatibility it's value should not change

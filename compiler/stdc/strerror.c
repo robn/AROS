@@ -135,7 +135,7 @@ static const char * _errstrings[__STDC_ELAST+2] =
     /* ENOMEM          */       "Out of memory",
     /* EACCES          */       "Permission denied",
     /* NA              */       NULL,
-    /* NA              */       NULL,
+    /* ENOTBLK         */       "Block device required",
     /* EBUSY           */       "Device or resource busy",
     /* EEXIST          */       "File exists",
     /* EXDEV           */       "Cross-device link",
