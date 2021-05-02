@@ -255,6 +255,8 @@ int pthread_attr_getinheritsched(pthread_attr_t *attr, int *inheritsched);
 int pthread_attr_setinheritsched(pthread_attr_t *attr, int inheritsched);
 int pthread_attr_getscope(const pthread_attr_t *attr, int *contentionscope);
 int pthread_attr_setscope(pthread_attr_t *attr, int contentionscope);
+int pthread_attr_getguardsize(const pthread_attr_t *attr, size_t *guardsize);
+int pthread_attr_setguardsize(pthread_attr_t *attr, size_t guardsize);
 
 //
 // Thread functions
