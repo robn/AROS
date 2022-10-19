@@ -4,6 +4,7 @@
     Desc: PosixC internal functions for Amiga<>UNIX filename conversion
 */
 
+#define DEBUG 1
 #include <aros/debug.h>
 
 #include <string.h>

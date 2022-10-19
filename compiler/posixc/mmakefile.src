@@ -134,6 +134,7 @@ POSIXC := \
     nanosleep \
     nrand48 \
     open \
+    openat \
     opendir \
     pathconf \
     pclose \

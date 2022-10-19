@@ -18,6 +18,7 @@ POSIXCTESTFILES := \
         lseek \
         mnt_names \
         open \
+        openat \
         opendir \
         pipe \
         random \

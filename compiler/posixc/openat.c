@@ -12,17 +12,23 @@
     NAME */
 #include <fcntl.h>
 
-        int open (
+        int openat (
 
 /*  SYNOPSIS */
+        int          dirfd,
         const char * pathname,
-        int              flags,
+        int          flags,
         ...)
 
 /*  FUNCTION
         Opens a file with the specified flags and name.
 
     INPUTS
+
+        dirfd - if pathname is relative, it will be intepreted relative to the
+                directory referred to by dirfd. If dirfd is AT_FDCWD, the
+                current directory will be used. If pathname is absolute, dirfd
+                will be ignored.
         pathname - Path and filename of the file you want to open.
         flags - Most be exactly one of: O_RDONLY, O_WRONLY or O_RDWR
                 to open a file for reading, writing or for reading and
@@ -73,7 +79,7 @@
         Most flags are not supported right now.
 
     SEE ALSO
-        close(), read(), write(), openat(), __posixc_fopen()
+        close(), read(), write(), open(), __posixc_fopen()
 
     INTERNALS
 
@@ -90,6 +96,6 @@
         va_end(ap);
     }
     
-    return __openat(AT_FDCWD, __getfirstfd(0), pathname, flags, mode);
-} /* open */
+    return __openat(dirfd, __getfirstfd(0), pathname, flags, mode);
+} /* openat */
 
